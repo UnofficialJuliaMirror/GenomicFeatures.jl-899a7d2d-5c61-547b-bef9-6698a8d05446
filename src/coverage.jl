@@ -67,7 +67,7 @@ function coverage(stream, seqname_isless::Function=isless)
                 current_coverage -= 1
             else
                 @assert pos >= coverage_first
-                push!(cov, GenomicInterval{UInt32}(coverage_seqname, coverage_first, pos, STRAND_BOTH, current_coverage))
+                push!(cov, GenomicInterval{UInt32}(coverage_seqname, coverage_first, pos, STRAND_BOTH, current_coverage)) #TODO: use AbstractGenomicInterval and retrieve interval type.
                 current_coverage -= 1
                 coverage_first = pos + 1
             end
@@ -79,7 +79,7 @@ function coverage(stream, seqname_isless::Function=isless)
                 current_coverage += 1
             else
                 if current_coverage > 0
-                    push!(cov, GenomicInterval{UInt32}(coverage_seqname, coverage_first, first(interval) - 1, STRAND_BOTH, current_coverage))
+                    push!(cov, GenomicInterval{UInt32}(coverage_seqname, coverage_first, first(interval) - 1, STRAND_BOTH, current_coverage)) #TODO: use AbstractGenomicInterval and retrieve interval type.
                 end
                 current_coverage += 1
                 coverage_first = first(interval)
@@ -112,7 +112,7 @@ function coverage_process_lasts_heap!(cov::GenomicIntervalCollection{UInt32}, cu
             current_coverage -= 1
         else
             @assert pos >= coverage_first
-            push!(cov, GenomicInterval{UInt32}(coverage_seqname, coverage_first, pos, STRAND_BOTH, current_coverage))
+            push!(cov, GenomicInterval{UInt32}(coverage_seqname, coverage_first, pos, STRAND_BOTH, current_coverage)) #TODO: use AbstractGenomicInterval and retrieve interval type.
             current_coverage -= 1
             coverage_first = pos + 1
         end
