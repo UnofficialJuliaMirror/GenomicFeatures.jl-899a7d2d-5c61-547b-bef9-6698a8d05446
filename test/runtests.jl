@@ -195,6 +195,20 @@ end
     end
 end
 
+@testset "Broadcastable" begin
+
+    function example(i1::GenomicFeatures.AbstractGenomicInterval, i2::GenomicFeatures.AbstractGenomicInterval)
+        return metadata(i1) * metadata(i2)
+    end
+
+    intervals = GenomicInterval.("chr1", [1:2, 3:4, 5:6], '.', 1:3)
+    @test collect(1:3) .* 2 == example.(intervals, GenomicInterval("chr1", 1:1, '.', 2))
+
+    sites = GenomicPosition.("chr1", 1:3, 1:3)
+    @test collect(1:3) .* 2 == example.(sites, GenomicPosition("chr1", 1, 2))
+
+end
+
 @testset "GenomicIntervalCollection" begin
 
     @testset "Constructor" begin

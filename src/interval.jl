@@ -8,6 +8,9 @@
 
 abstract type AbstractGenomicInterval{T} <: IntervalTrees.AbstractInterval{Int64} end
 
+# Broadcast.broadcastable(x::AbstractGenomicInterval) = Ref(x) #TODO: move into IntervalTrees?
+Broadcast.broadcastable(x::IntervalTrees.AbstractInterval) = Ref(x) #TODO: move into IntervalTrees?
+
 "A genomic interval specifies interval with some associated metadata."
 struct GenomicInterval{T} <: AbstractGenomicInterval{T}
     seqname::String
